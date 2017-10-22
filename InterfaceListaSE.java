@@ -5,6 +5,9 @@ import javax.swing.*;
 
 public class InterfaceListaSE extends JFrame implements ActionListener
 { 
+    private int dado;
+    private int posicao;
+    
     //janela
     JButton Adicionar = new JButton("Adicionar");
     JButton BuscarE = new JButton("Buscar Elemento");
@@ -129,28 +132,27 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             add(okRem);
         }
         
-        int valor, posicao;
         if (ae.getSource()==okAdd)
         {
-            valor=Integer.parseInt(this.CaixaValor.getText());
+            dado=Integer.parseInt(this.CaixaValor.getText());
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            MetodosListaSE inserir = new MetodosListaSE();
-            inserir.insere(posicao, valor);
+            MetodosListaSE insere = new MetodosListaSE();
+            insere.insere(posicao, dado);
         }
         
         if (ae.getSource()==okBusE)
         {
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            MetodosListaSE buscare = new MetodosListaSE();
-            buscare.elemento(posicao);
+            MetodosListaSE buscarE = new MetodosListaSE();
+            buscarE.elemento(posicao);
             
         }
         
         if (ae.getSource()==okBusP)
         {
-            valor=Integer.parseInt(this.CaixaValor.getText());
-            MetodosListaSE buscarp = new MetodosListaSE();
-            buscarp.posicao(valor);
+            dado=Integer.parseInt(this.CaixaValor.getText());
+            MetodosListaSE buscarP = new MetodosListaSE();
+            buscarP.posicao(dado);
         }
         
         if (ae.getSource()==okRem)
