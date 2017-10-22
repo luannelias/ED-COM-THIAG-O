@@ -1,7 +1,7 @@
 package listase;
 import java.awt.Graphics;
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class InterfaceListaSE extends JFrame implements ActionListener
 { 
@@ -11,20 +11,22 @@ public class InterfaceListaSE extends JFrame implements ActionListener
     JButton BuscarP = new JButton("Buscar Posição");
     JButton Remover = new JButton("Remover");
     JButton okAdd = new JButton("Ok");
-    JButton okBus = new JButton("Ok");
-    JButton okRemBus = new JButton("Ok");
+    JButton okBusE = new JButton("Ok");
+    JButton okBusP = new JButton("Ok");
+    JButton okRem = new JButton("Ok");
     
     //caixa
     JTextField CaixaValor = new JTextField();
     JTextField CaixaPosicao = new JTextField ();
     
-    //mensagens
+    //lengendas
     JLabel MsgValor = new JLabel("Valor:");
     JLabel MsgPosicao = new JLabel("Posição:");
     
     public void Desenhos(Graphics g)
     {
-        g.drawLine(90, 90, 500, 500);
+        g.drawLine(2, 2, 2, 2);
+        repaint();
     }
     
     public InterfaceListaSE()
@@ -54,15 +56,16 @@ public class InterfaceListaSE extends JFrame implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) 
+    public void actionPerformed(ActionEvent ae) 
     {
         okAdd.addActionListener(this);
-        okBus.addActionListener(this);
-        okRemBus.addActionListener(this);
+        okBusP.addActionListener(this);
+        okBusE.addActionListener(this);
+        okRem.addActionListener(this);
         
-        if (e.getSource()==Adicionar)
+        if (ae.getSource()==Adicionar)
         {
-            //criando avisos
+            //criando legendas
             remove(BuscarE);
             remove(BuscarP);
             remove(Remover);
@@ -81,10 +84,25 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             add(okAdd);
         }
         
-        if (e.getSource()==BuscarE)
+        if (ae.getSource()==BuscarE) //busca o elemento
         {
             remove(Adicionar);
             remove(BuscarP);
+            remove(Remover);
+            MsgPosicao.setBounds(189, 50, 120, 25);
+            add(MsgPosicao);
+            
+            CaixaPosicao.setBounds(240, 50, 120, 25);
+            add(CaixaPosicao);
+            
+            okBusE.setBounds(370, 51, 80, 20);
+            add(okBusE);
+        }
+        
+        if (ae.getSource()==BuscarP) //retorno o elemento da posição
+        {
+            remove(Adicionar);
+            remove(BuscarE);
             remove(Remover);
             MsgValor.setBounds(205, 50, 120, 25);
             add(MsgValor);
@@ -92,26 +110,11 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             CaixaValor.setBounds(240, 50, 120, 25);
             add(CaixaValor);
             
-            okBus.setBounds(370, 51, 80, 20);
-            add(okBus);
+            okBusP.setBounds(370, 51, 80, 20);
+            add(okBusP);
         }
         
-        if (e.getSource()==BuscarP)
-        {
-            remove(Adicionar);
-            remove(BuscarE);
-            remove(Remover);
-            MsgPosicao.setBounds(189, 50, 120, 25);
-            add(MsgPosicao);
-            
-            CaixaPosicao.setBounds(240, 50, 120, 25);
-            add(CaixaPosicao);
-            
-            okRemBus.setBounds(370, 51, 80, 20);
-            add(okRemBus);
-        }
-        
-        if (e.getSource()==Remover)
+        if (ae.getSource()==Remover)
         {
             remove(Adicionar);
             remove(BuscarE);
@@ -122,29 +125,39 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             CaixaPosicao.setBounds(240, 50, 120, 25);
             add(CaixaPosicao);
             
-            okRemBus.setBounds(370, 51, 80, 20);
-            add(okRemBus);
+            okRem.setBounds(370, 51, 80, 20);
+            add(okRem);
         }
         
         int valor, posicao;
-        if (e.getSource()==okAdd)
+        if (ae.getSource()==okAdd)
         {
             valor=Integer.parseInt(this.CaixaValor.getText());
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            System.out.println("" +valor);
-            System.out.println("" +posicao);
+            MetodosListaSE inserir = new MetodosListaSE();
+            inserir.insere(posicao, valor);
         }
         
-        if (e.getSource()==okBus)
-        {
-            valor=Integer.parseInt(this.CaixaValor.getText());
-            System.out.println("" +valor);
-        }
-        
-        if (e.getSource()==okRemBus)
+        if (ae.getSource()==okBusE)
         {
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            System.out.println("" +posicao);
+            MetodosListaSE buscare = new MetodosListaSE();
+            buscare.elemento(posicao);
+            
+        }
+        
+        if (ae.getSource()==okBusP)
+        {
+            valor=Integer.parseInt(this.CaixaValor.getText());
+            MetodosListaSE buscarp = new MetodosListaSE();
+            buscarp.posicao(valor);
+        }
+        
+        if (ae.getSource()==okRem)
+        {
+            posicao=Integer.parseInt(this.CaixaPosicao.getText());
+            MetodosListaSE remove = new MetodosListaSE();
+            remove.remove(posicao);
         }
         repaint();
     }
