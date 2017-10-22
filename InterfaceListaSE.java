@@ -1,5 +1,5 @@
 package listase;
-//import java.awt.Graphics;
+import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -10,7 +10,9 @@ public class InterfaceListaSE extends JFrame implements ActionListener
     JButton BuscarE = new JButton("Buscar Elemento");
     JButton BuscarP = new JButton("Buscar Posição");
     JButton Remover = new JButton("Remover");
-    JButton Ok = new JButton("Ok");
+    JButton okAdd = new JButton("Ok");
+    JButton okBus = new JButton("Ok");
+    JButton okRemBus = new JButton("Ok");
     
     //caixa
     JTextField CaixaValor = new JTextField();
@@ -20,13 +22,17 @@ public class InterfaceListaSE extends JFrame implements ActionListener
     JLabel MsgValor = new JLabel("Valor:");
     JLabel MsgPosicao = new JLabel("Posição:");
     
+    public void Desenhos(Graphics g)
+    {
+        g.drawLine(90, 90, 500, 500);
+    }
+    
     public InterfaceListaSE()
     {
         Adicionar.addActionListener(this);
         BuscarE.addActionListener(this);
         BuscarP.addActionListener(this);
         Remover.addActionListener(this);
-        
         
         //criando botões
         setLayout(null);
@@ -44,14 +50,15 @@ public class InterfaceListaSE extends JFrame implements ActionListener
         setSize (500, 400);
         setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo (null);
-      //setResizable(false);
         setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        Ok.addActionListener(this);
+        okAdd.addActionListener(this);
+        okBus.addActionListener(this);
+        okRemBus.addActionListener(this);
         
         if (e.getSource()==Adicionar)
         {
@@ -70,8 +77,8 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             CaixaPosicao.setBounds(240, 80, 120, 25);
             add(CaixaPosicao);
             
-            Ok.setBounds(370, 52, 80, 20);
-            add(Ok);        
+            okAdd.setBounds(370, 52, 80, 20);
+            add(okAdd);
         }
         
         if (e.getSource()==BuscarE)
@@ -85,8 +92,8 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             CaixaValor.setBounds(240, 50, 120, 25);
             add(CaixaValor);
             
-            Ok.setBounds(370, 51, 80, 20);
-            add(Ok);
+            okBus.setBounds(370, 51, 80, 20);
+            add(okBus);
         }
         
         if (e.getSource()==BuscarP)
@@ -100,8 +107,8 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             CaixaPosicao.setBounds(240, 50, 120, 25);
             add(CaixaPosicao);
             
-            Ok.setBounds(370, 51, 80, 20);
-            add(Ok);
+            okRemBus.setBounds(370, 51, 80, 20);
+            add(okRemBus);
         }
         
         if (e.getSource()==Remover)
@@ -115,22 +122,30 @@ public class InterfaceListaSE extends JFrame implements ActionListener
             CaixaPosicao.setBounds(240, 50, 120, 25);
             add(CaixaPosicao);
             
-            Ok.setBounds(370, 51, 80, 20);
-            add(Ok);
-            
-            if (e.getSource()==Ok)
-            {
-                System.out.println("Olá");
-            }
+            okRemBus.setBounds(370, 51, 80, 20);
+            add(okRemBus);
         }
         
         int valor, posicao;
-        if (e.getSource()==Ok)
+        if (e.getSource()==okAdd)
         {
             valor=Integer.parseInt(this.CaixaValor.getText());
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
+            System.out.println("" +valor);
+            System.out.println("" +posicao);
+        }
+        
+        if (e.getSource()==okBus)
+        {
+            valor=Integer.parseInt(this.CaixaValor.getText());
+            System.out.println("" +valor);
+        }
+        
+        if (e.getSource()==okRemBus)
+        {
+            posicao=Integer.parseInt(this.CaixaPosicao.getText());
+            System.out.println("" +posicao);
         }
         repaint();
     }
-
 }
