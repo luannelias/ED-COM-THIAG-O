@@ -8,7 +8,7 @@ public class InterfaceListaSE extends JFrame implements ActionListener
     private int dado;
     private int posicao;
     
-    //janela
+    //botões
     JButton Adicionar = new JButton("Adicionar");
     JButton BuscarE = new JButton("Buscar Elemento");
     JButton BuscarP = new JButton("Buscar Posição");
