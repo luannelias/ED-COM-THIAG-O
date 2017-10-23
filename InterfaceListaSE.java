@@ -1,10 +1,10 @@
 package listase;
-import java.awt.Graphics;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class InterfaceListaSE extends JFrame implements ActionListener
 { 
+    MetodosListaSE lista = new MetodosListaSE();
     private int dado;
     private int posicao;
     
@@ -26,14 +26,9 @@ public class InterfaceListaSE extends JFrame implements ActionListener
     JLabel MsgValor = new JLabel("Valor:");
     JLabel MsgPosicao = new JLabel("Posição:");
     
-    public void Desenhos(Graphics g)
-    {
-        g.drawLine(2, 2, 2, 2);
-        repaint();
-    }
-    
     public InterfaceListaSE()
     {
+        //comando de botões
         Adicionar.addActionListener(this);
         BuscarE.addActionListener(this);
         BuscarP.addActionListener(this);
@@ -136,30 +131,26 @@ public class InterfaceListaSE extends JFrame implements ActionListener
         {
             dado=Integer.parseInt(this.CaixaValor.getText());
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            MetodosListaSE insere = new MetodosListaSE();
-            insere.insere(posicao, dado);
+            lista.insere(posicao, dado);
         }
         
         if (ae.getSource()==okBusE)
         {
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            MetodosListaSE buscarE = new MetodosListaSE();
-            buscarE.elemento(posicao);
+            lista.elemento(posicao);
             
         }
         
         if (ae.getSource()==okBusP)
         {
             dado=Integer.parseInt(this.CaixaValor.getText());
-            MetodosListaSE buscarP = new MetodosListaSE();
-            buscarP.posicao(dado);
+            lista.posicao(dado);
         }
         
         if (ae.getSource()==okRem)
         {
             posicao=Integer.parseInt(this.CaixaPosicao.getText());
-            MetodosListaSE remove = new MetodosListaSE();
-            remove.remove(posicao);
+            lista.remove(posicao);
         }
         repaint();
     }
